@@ -209,12 +209,13 @@ namespace Airline.Areas.Identity.Controllers
             {
                 ApplicationUser user = new()
                 {
-                    UserName=EmailExist.UserName,
+                    UserName = EmailExist.UserName,
                     Name = EmailExist.Name,
                     Email = EmailExist.Email,
                     Age = EmailExist.Age,
                     ImageUrl = EmailExist.ImageUrl,
                     Details = EmailExist.Details,
+                    Address = EmailExist.Address
                 };
                 var roles = await userManager.GetRolesAsync(EmailExist);
                 string RoleName = roles[0];
