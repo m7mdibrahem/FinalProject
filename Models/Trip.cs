@@ -16,5 +16,6 @@ namespace Models
         public DateOnly DepartDate { get; set; }
         public ICollection<TicketTrip> TicketTrips { get; set; } = new List<TicketTrip>();
         public ICollection<Seat> seats { get; set; } = new List<Seat>();
+        public ICollection<CompanyTrip> CompanyTrips { get; set; } = new List<CompanyTrip>();
     }
 }

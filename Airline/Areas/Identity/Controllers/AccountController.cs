@@ -233,5 +233,10 @@ namespace Airline.Areas.Identity.Controllers
             }
             return View(resetVM);
         }
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Login));
+        }
     }
 }

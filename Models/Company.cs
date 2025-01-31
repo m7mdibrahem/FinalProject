@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Country
+    public class Company
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
+        public string Description { get; set; }
         public string ImgUrl { get; set; }
-        public ICollection<City> Cities { get; set; } = new List<City>();
+        public ICollection<CompanyTrip> CompanyTrips { get; set; } = new List<CompanyTrip>();
     }
 }

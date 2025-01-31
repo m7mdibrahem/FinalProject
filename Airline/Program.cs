@@ -47,6 +47,9 @@ namespace Airline
             builder.Services.AddScoped<ITripRepo, TripRepo>();
             builder.Services.AddScoped<ITicketTripRepo, TicketTripRepo>();
             builder.Services.AddScoped<ISeatRepo, SeatRepo>();
+            builder.Services.AddScoped<ICompanyRepo, CompanyRepo>();
+            builder.Services.AddScoped<ICompanyTripRepo, CompanyTripRepo>();
+            builder.Services.AddScoped<IRequestCompanyRepo, RequestCompanyRepo>();
 
             var app = builder.Build();
 

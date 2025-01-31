@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Country
+    public class RequestCompany
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
+        public string Description { get; set; }
         public string ImgUrl { get; set; }
-        public ICollection<City> Cities { get; set; } = new List<City>();
+        public CompStat? CompanyStatus { get; set; }
     }
 }

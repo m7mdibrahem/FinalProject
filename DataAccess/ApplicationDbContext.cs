@@ -17,6 +17,9 @@ namespace DataAccess
         public DbSet<Trip> Trips { get; set; }
         public DbSet<TicketTrip> TicketTrips { get; set; }
         public DbSet<Seat> Seats { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<CompanyTrip> CompanyTrips { get; set; }
+        public DbSet<RequestCompany> RequestCompanies { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,6 +37,11 @@ namespace DataAccess
                 .Property(e => e.Availability)
                 .HasConversion<string>()
                 .HasDefaultValue(Availability.Free);
+
+            modelBuilder.Entity<RequestCompany>()
+                .Property(e => e.CompanyStatus)
+                .HasConversion<string>()
+                .HasDefaultValue(CompStat.Pending);
         }
     }
 }

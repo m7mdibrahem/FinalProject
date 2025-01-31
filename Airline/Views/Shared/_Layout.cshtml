@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject UserManager<ApplicationUser> user;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,18 +26,49 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle a_main" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
-                            <div class="dropdown-menu drop_list">
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="CountryDetail" asp-action="Index">Country</a>
-                            </div>
+                         <li class="nav-item">
+                           <a class="nav-link text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Admin Panel</a>
                         </li>
                     </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="right_head">
+                            <div class="right_head_profile">
+                                <p class="p_prof">Welcome, @user.GetUserAsync(User).Result.UserName</p>
+                                <div id="open_prof" class="img_prof" style="background-image:url('@Url.Content("~/images/"+user.GetUserAsync(User).Result.ImageUrl)')"></div>
+                            </div>
+                            <div class="prof_mang shadow-sm">
+                                <p class="p_mang">@user.GetUserAsync(User).Result.UserName</p>
+                                <div class="mid_mang">
+                                    <div class="img_mang" style="background-image:url('@Url.Content("~/images/"+user.GetUserAsync(User).Result.ImageUrl)')"></div>
+                                    <h4 class="h_mang">Hi,@user.GetUserAsync(User).Result.UserName !</h4>
+                                    <a href="#" class="a_mang">Manage your Account</a>
+                                </div>
+                                <div class="lower_mang col-12">
+                                    <a asp-area="Identity" asp-controller="Account" asp-action="Register" class="a_lower_left">
+                                        <i class="fa-solid fa-plus i_plus"></i>
+                                        <p class="p_mang">Add Account</p>
+                                    </a>
+                                    <a asp-area="Identity" asp-controller="Account" asp-action="Logout" class="a_lower_right">
+                                        <i class="fa-solid fa-arrow-right-from-bracket i_out"></i>
+                                        <p class="p_mang">Sign out</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="right_notauth">
+                            <a asp-area="Identity" asp-controller="Account" asp-action="Register" class="a_notauth">Signup</a>
+                            <a asp-area="Identity" asp-controller="Account" asp-action="Login" class="a_notauth">Login</a>
+                        </div>
+                    }
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div>
         <main role="main" class="main_all pb-3">
             @RenderBody()
         </main>
@@ -43,7 +76,28 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        const open_prof = document.getElementById('open_prof');
+        const prof_mang = document.querySelector('.prof_mang');
+        const body = document.querySelector('body');
+        open_prof.onclick = function (e) {
+            if (prof_mang.style.display == 'none') {
+                prof_mang.style.display = 'flex';
+            } else {
+                prof_mang.style.display = 'none';
+            }
+            e.stopPropagation();
+        }
+        prof_mang.onclick = function (e) {
+            e.stopPropagation();
+        }
+        body.onclick = function () {
+            prof_mang.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
