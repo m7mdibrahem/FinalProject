@@ -1,0 +1,35 @@
+﻿@model IntroVM
+
+<link rel="stylesheet" href="~/css/home.css" />
+
+<h4 class="col-12">Trip Ideas</h4>
+<div class="t_categ col-12">
+    @foreach (var item in Model.Categories)
+    {
+        if (item.Id == Model.Category.Id)
+        {
+            <a href="#target" data-id="@item.Id" class="a_categ" style="color:blue !important;">@item.Name</a>
+        }
+        else
+        {
+            <a href="#target" data-id="@item.Id" class="a_categ">@item.Name</a>
+        }
+    }
+</div>
+<div class="t_cities" id="target">
+    @foreach (var item in Model.Category.CityCategories.Take(9))
+    {
+        <div class="cit shadow">
+            <div class="left_cit" style="background-image:url('@Url.Content("~/images/"+item.City.ImgUrl)')"></div>
+            <div class="right_cit">
+                <div class="upper_right">
+                    <p style="margin:0;font-weight: 700;">@item.City.Name</p>
+                    <p style="margin: 0;font-size: 0.9rem;color: #00000091;">@item.City.Country.Name</p>
+                </div>
+                <div class="lower_right">
+                    <p style="margin:0;font-weight: 700;">Visits:@item.City.Visits</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

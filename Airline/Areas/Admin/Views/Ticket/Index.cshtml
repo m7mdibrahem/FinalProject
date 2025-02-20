@@ -1,0 +1,64 @@
+﻿@model List<Ticket>
+<link rel="stylesheet" href="~/css/trp.css" />
+
+<div class="main_page col-12">
+    <div class="main_content col-10">
+        <div class="upper_content col-12">
+            <h3 class="h_upper">Ticket</h3>
+        </div>
+        <div class="lower_content col-12">
+            <table id="example" class="display" style="width:100%">
+                <thead class="t_head">
+                    <tr>
+                        <th style="text-align:left;width:14%;">Passenger name</th>
+                        <th style="width:10%;">From</th>
+                        <th style="text-align:left;width:10%;">To</th>
+                        <th style="text-align:left;width:10%;">First</th>
+                        <th style="text-align:left;width:14%;">Business</th>
+                        <th style="text-align:left;width:14%;">Premium</th>
+                        <th style="text-align:left;width:14%;">Economy</th>
+                        <th style="text-align:left;width:14%;">Company name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ApplicationUser.Name</td>
+                            <td style="text-align:left;">@item.Trip.From</td>
+                            <td style="text-align:left;">@item.Trip.To</td>
+                            <td style="text-align:left;">@item.Trip.First</td>
+                            <td style="text-align:left;">@item.Trip.Business</td>
+                            <td style="text-align:left;">@item.Trip.Premium</td>
+                            <td style="text-align:left;">@item.Trip.Economy</td>
+                            <td style="text-align:left;">@item.Trip.Company.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--fixed page-->
+<div class="page_fix col-12">
+    <div class="del_box">
+        <div class="upper_box col-12">
+            <h4 class="h_box">Confirm Delete</h4>
+            <i class="fa-solid fa-x i_box"></i>
+        </div>
+        <div class="mid_box col-12"></div>
+        <div class="lower_box col-12">
+            <p class="p_box">Are you sure you want to delete ?</p>
+            <div class="btn_box">
+                <a href="#" class="a_box">yes</a>
+                <button class="btn_no">no</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        new DataTable('#example');
+    </script>
+}

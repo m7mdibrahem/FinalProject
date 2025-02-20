@@ -1,0 +1,215 @@
+﻿@model DashVM
+<link rel="stylesheet" href="~/css/dashb.css" />
+<div class="main_page col-12">
+    <div class="main_area col-10">
+        <div class="upper_content col-12">
+            <h4>Dashboard</h4>
+        </div>
+
+        <div class="main_inform col-12">
+            <!-- first -->
+            <div class="inform_box shadow-sm">
+                <div class="left_box">
+                    <h4 class="h_box">@Model.Booked</h4>
+                    <p class="p_box">Flights Booked</p>
+                </div>
+                <i class="fa-regular fa-calendar i_calender"></i>
+            </div>
+            <!-- second -->
+            <div class="inform_box shadow-sm">
+                <div class="left_box">
+                    <h4 class="h_box">@Model.Done</h4>
+                    <p class="p_box">Flights Done</p>
+                </div>
+                <i class="fa-solid fa-check i_success"></i>
+            </div>
+            <!-- third -->
+            <div class="inform_box shadow-sm">
+                <div class="left_box">
+                    <h4 class="h_box">@Model.Cancel</h4>
+                    <p class="p_box">Flights Cancelled</p>
+                </div>
+                <i class="fa-solid fa-xmark i_cancel"></i>
+            </div>
+            <!-- fourth -->
+            <div class="inform_box shadow-sm">
+                <div class="left_box">
+                    <h4 class="h_box">@Model.TotalPrice</h4>
+                    <p class="p_box">Total Spend</p>
+                </div>
+                <i class="fa-solid fa-dollar-sign i_money"></i>
+            </div>
+        </div>
+        <!--lower starts-->
+        <div class="lower_content col-12">
+            <!-- lower left starts -->
+            <div class="lower_left">
+                <p class="p_lower_left">Latest Tickets Sold</p>
+                <table class="table table-striped" style="margin-bottom: 0;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Form</th>
+                            <th scope="col">To</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">$Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Payments)
+                        {
+                            <tr>
+                                <td>@item.ApplicationUser.Name</td>
+                                <td>@item.ApplicationUser.Email</td>
+                                <td>@item.Trip.From</td>
+                                <td>@item.Trip.To</td>
+                                <td>
+                                    @if (item.Status == PayStatus.Completed)
+                                    {
+                                        <div class="div_paid">
+                                            <i class="fa-regular fa-circle-check i_paid"></i>
+                                            <p class="p_status">Paid</p>
+                                        </div>
+                                    }
+                                    else if (item.Status == PayStatus.Cancelled)
+                                    {
+                                        <div class="div_cancel">
+                                            <i class="fa-solid fa-circle-exclamation"></i>
+                                            <p class="p_status">Cancelled</p>
+                                        </div>
+                                    }
+                                    else if (item.Status == PayStatus.Refunded)
+                                    {
+                                        <div class="div_pend">
+                                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                                            <p class="p_status">Refunded</p>
+                                        </div>
+                                    }
+                                </td>
+                                <td>$@item.price</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- lower left ends -->
+            <!-- lower rigth starts -->
+            <div class="lower_right">
+                <div class="lower_right_chart shadow-sm col-12">
+                    <h5>Most Vistited Cities</h5>
+                    <canvas id="cityChart" class="chart "></canvas>
+                </div>
+            </div>
+            <!-- lower rigth ends -->
+            <div class="lower_area col-12">
+                @foreach (var item in Model.ApplicationUsers)
+                {
+                    <div class="vip_div shadow-sm col-12">
+                        <h6>V.I.P Passenger</h6>
+                        <div class="person_div col-12">
+                            <div class="left_person">
+                                @if (item.ImageUrl == null)
+                                {
+                                    <div class="img_person" style="background-image:url('@Url.Content("~/images/unknown.png")')"></div>
+                                }
+                                else
+                                {
+                                    <div class="img_person" style="background-image:url('@Url.Content("~/images/"+item.ImageUrl)')"></div>
+                                }
+                                <div class="inf_pers">
+                                    <p class="p_inf_pers">@item.Name</p>
+                                    <p class="p_inf_pers">@item.Email</p>
+                                </div>
+                            </div>
+                            <p class="p_person_des">@item.Miles Miles</p>
+                            <div class="line_person col-12"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <!--lower ends-->
+    </div>
+    <!-- left nav fixed started -->
+</div>
+
+@section Scripts {
+    <script>
+
+        const labels = [];
+        const data = [];
+        const backgroundColors = [];
+        function getRandomColor() {
+            return `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`;
+        }
+        @foreach (var item in Model.Cities)
+        {
+            @:labels.push("@item.Name %");
+            @:backgroundColors.push(getRandomColor());
+        }
+        @foreach (var item in Model.Percentages)
+        {
+            @:data.push(@item);
+        }
+            new Chart(document.getElementById('cityChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: backgroundColors,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+
+        const icon_title = document.querySelector('#icon_title');
+        const table_content = document.querySelector('#table_content');
+        const nav_page = document.querySelector('.nav_page');
+        const main_page = document.querySelector('.main_page');
+        const left_nav = document.querySelector('.left_nav');
+        const mini_content = document.querySelector('.mini_content');
+        const i_nav = document.querySelector('.i_nav');
+        const a_nav_title = document.querySelector('.a_nav_title');
+
+        icon_title.onclick = function () {
+            nav_page.style.display = "block";
+            setTimeout(function () {
+                left_nav.classList.add("left_nav_appear");
+            }, 200)
+        };
+
+        nav_page.onclick = function () {
+            nav_page.style.display = "none";
+            if (i_nav.classList.contains("i_nav_rotate")) {
+                i_nav.classList.remove("i_nav_rotate");
+                mini_content.style.display = "none";
+            }
+            left_nav.classList.remove("left_nav_appear");
+        };
+        left_nav.onclick = function (e) {
+            e.stopPropagation();
+        };
+        table_content.onclick = function () {
+            if (i_nav.classList.contains("i_nav_rotate")) {
+                i_nav.classList.remove("i_nav_rotate");
+                mini_content.style.display = "none";
+            } else {
+                i_nav.classList.add("i_nav_rotate");
+                mini_content.style.display = "flex";
+            }
+        }
+        a_nav_title.onclick = function () {
+            nav_page.style.display = "none";
+        }
+    </script>
+}

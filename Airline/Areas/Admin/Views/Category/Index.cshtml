@@ -1,0 +1,99 @@
+﻿@model List<Category>
+<link rel="stylesheet" href="~/css/ctg.css" />
+
+<div class="main_page col-12">
+    <div class="main_content col-9">
+        <div class="upper_content col-12">
+            <h3 class="h_upper">Catgeory</h3>
+            <a asp-action="Creation" class="a_upper"><i class="bi bi-plus-circle"></i> Create new category</a>
+        </div>
+        <div class="lower_content col-12">
+            <table id="example" class="display" style="width:100%">
+                <thead class="t_head">
+                    <tr>
+                        <th>Name</th>
+                        <th class="t_act"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td style="text-align:right;padding-top:0.6rem;padding-bottom:0.6rem;">
+                                <a asp-action="Edition" asp-route-id="@item.Id" class="a_edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                <a href="#" data-id="@item.Id" data-name="@item.Name" class="a_delete"><i class="fa-regular fa-trash-can"></i> Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--fixed page-->
+<div class="page_fix col-12">
+    <div class="del_box">
+        <div class="upper_box col-12">
+            <h4 class="h_box">Confirm Delete</h4>
+            <i class="fa-solid fa-x i_box"></i>
+        </div>
+        <div class="mid_box col-12"></div>
+        <div class="lower_box col-12">
+            <p class="p_box">Are you sure you want to delete <strong class="s_name"></strong> category</p>
+            <div class="btn_box">
+                <a href="#" class="a_box">yes</a>
+                <button class="btn_no">no</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const a_delete = document.querySelectorAll('.a_delete');
+        const page_fix = document.querySelector('.page_fix');
+        const a_box = document.querySelector('.a_box');
+        const del_box = document.querySelector('.del_box');
+        const s_name = document.querySelector('.s_name');
+        const btn_no = document.querySelector('.btn_no');
+        const i_box = document.querySelector('.i_box');
+
+        a_delete.forEach(btn => {
+            btn.onclick = function () {
+                const categoryId = btn.getAttribute('data-id');
+                const categoryName = btn.getAttribute('data-name');
+                page_fix.style.display = "flex";
+                setTimeout(function () {
+                    del_box.classList.add('del_box_dis');
+                }, 100);
+                s_name.textContent = `${categoryName}`;
+                a_box.setAttribute('href', `/Admin/Category/Deletion/${categoryId}`);
+            };
+        });
+
+        del_box.onclick = function (e) {
+            e.stopPropagation();
+        };
+
+        page_fix.onclick = function (e) {
+            page_fix.style.display = "none";
+            del_box.classList.remove('del_box_dis');
+
+        };
+
+        btn_no.onclick = function (e) {
+            page_fix.style.display = "none";
+            del_box.classList.remove('del_box_dis');
+
+        };
+
+        i_box.onclick = function (e) {
+            page_fix.style.display = "none";
+            del_box.classList.remove('del_box_dis');
+
+        };
+
+        new DataTable('#example');
+    </script>
+}

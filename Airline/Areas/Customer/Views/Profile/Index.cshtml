@@ -1,0 +1,59 @@
+﻿@model ProfileVM
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManeger
+<link rel="stylesheet" href="~/css/myprofile.css" />
+<div class="back">
+    <div class="container1">
+
+        <div class="cover">
+            <div class="profilePic">
+
+                <h2>
+                    @User.Identity.Name Profile
+                </h2>
+                <div class="image">
+                    @if (UserManeger.GetUserAsync(User).Result.ImageUrl == null)
+                    {
+                        <img src="~/images/unknown.png" />
+                    }
+                    else
+                    {
+                        <img src="~/images/@UserManeger.GetUserAsync(User).Result.ImageUrl" />
+                    }
+                    <form asp-action="UpdatePhoto" method="post" enctype="multipart/form-data">
+                        <input type="file" name="ImageUrl" value="" class="form-control" />
+                        <input type="submit" value="update photo" class="mt-2 btn btn-primary" />
+                    </form>
+                </div>
+            </div>
+
+            <div class="inputs">
+
+                <form asp-action="Index">
+                    <div class="U-input">
+                        <label asp-for="Name">Name</label><br>
+                        <input asp-for="Name" type="text" />
+                    </div>
+
+                    <div class="U-input">
+                        <label asp-for="UserName">Username</label><br>
+                        <input asp-for="UserName" type="text" />
+                    </div>
+                    <div class="U-input">
+                        <label asp-for="Email">Email</label><br>
+                        <input asp-for="Email" type="email" />
+                    </div>
+                    <div class="btns">
+                        <button class="edit" type="submit">Edit</button>
+                        <a href="/Customer/Profile/password" class="changepass" type="button">change password</a>
+
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+

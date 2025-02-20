@@ -1,0 +1,29 @@
+﻿<link rel="stylesheet" href="~/css/canc.css" />
+<div class="main_page col-12">
+    <div class="main_content col-9">
+        <a asp-controller="Home" asp-action="index" class="upper_back">
+            <i class="fa-solid fa-left-long i_back"></i>
+            <p class="p_back">Home</p>
+        </a>
+        <div class="lower_content col-12">
+            <i class="fa-solid fa-circle-exclamation i_error"></i>
+            <div class="div_msg">
+                <p class="p_fail">Something went wrong</p>
+                <p class="p_reset">please, restart booking again</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const upper_back = document.querySelector(".upper_back");
+        const i_back = document.querySelector(".i_back");
+        upper_back.addEventListener("mouseenter", function () {
+            i_back.style.paddingLeft = '0%';
+        });
+        upper_back.addEventListener("mouseleave", function () {
+            i_back.style.paddingLeft = '13%';
+        });
+    </script>
+}

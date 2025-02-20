@@ -1,0 +1,27 @@
+﻿@model Category
+<link href="~/css/mycity.css" rel="stylesheet" />
+
+<div class="back ">
+    <a href="/Customer/Home" class="btn btn-dark"><i class="fa-solid fa-arrow-left"></i>  Home </a>
+</div>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model.CityCategories)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-3 photo">
+                <img src="~/images/@item.City.ImgUrl" alt="" width="100%" height="100%">
+                <div class="layer">
+                    <h3>
+                        @item.City.Name
+                    </h3>
+                    <p>
+                        @item.City.Country.Name
+                    </p>
+                    <p>
+                        Visits: @item.City.Visits
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

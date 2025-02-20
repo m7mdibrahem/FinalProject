@@ -1,0 +1,148 @@
+﻿@model IntroVM
+
+<link rel="stylesheet" href="~/css/home.css" />
+<div class="main_page col-12">
+    <!--content head starts-->
+    <div class="content_head col-12">
+        <!--swiper starts-->
+        <!-- Swiper -->
+        <div class="swip_head col-12">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="~/images/house.jpg" class="img_head col-12" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="~/images/train.jpg" class="img_head col-12" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="~/images/castle.jpg" class="img_head col-12" />
+                    </div>
+                </div>
+                <div class="swiper-button-next" style="display:none"></div>
+                <div class="swiper-button-prev" style="display:none"></div>
+                <div class="swiper-pagination" style="display:none"></div>
+            </div>
+        </div>
+        <!--swiper ends-->
+        <!--filter starts-->
+        <div class="filter_head col-12">
+            <div class="head_content col-8">
+                <p class="p_head" style="top:-44px;"><i class="fa-solid fa-plane i_head"></i> Flights</p>
+                <form  asp-controller="SearchTrip" asp-action="Index" class="head_form col-12">
+                    <div class="form-floating" style="width:47%;">
+                        <select class="form-select in_from" id="floatingSelect" name="From">
+                            @foreach (var item in Model.Cities.OrderBy(e => e.Country.Name))
+                            {
+                                <option value="@item.Name">@item.Country.Name,@item.Name</option>
+                            }
+                        </select>
+                        <label for="floatingSelect">From</label>
+                    </div>
+                    <i class="fa-solid fa-arrow-right-arrow-left i_form"></i>
+                    <div class="form-floating" style="width:47%;">
+                        <select class="form-select in_to" id="floatingSelect" name="To">
+                            @foreach (var item in Model.Cities.OrderBy(e => e.Country.Name))
+                            {
+                                <option value="@item.Name">@item.Country.Name,@item.Name</option>
+                            }
+                        </select>
+                        <label for="floatingSelect">To</label>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="btn_area col-12">
+                            <button type="submit" class="btn_search">search</button>
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+        <!--filter ends-->
+    </div>
+    <!--content head ends-->
+    <div class="main_area col-9">
+        .
+        <!--ad starts-->
+        <div class="ad col-12">
+            <div class="ad_box">
+                <img src="~/images/scope.png" class="img_ad" />
+                <h6 class="h_ad">Top travel app</h6>
+                <p class="p_ad">our web application have different trip with different companies</p>
+            </div>
+            <div class="ad_box">
+                <img src="~/images/box.png" class="img_ad" />
+                <h6 class="h_ad">Shop with confidence</h6>
+                <p class="p_ad">No hidden fees, taxes or other nasty surprises</p>
+            </div>
+            <div class="ad_box">
+                <img src="~/images/card.png" class="img_ad" />
+                <h6 class="h_ad">Pay the way you want</h6>
+                <p class="p_ad">See only sellers who support your preferred methods</p>
+            </div>
+            <div class="ad_box">
+                <img src="~/images/locate.png" class="img_ad" />
+                <h6 class="h_ad">Instant booking</h6>
+                <p class="p_ad">For selected sellers, book with just a couple of clicks</p>
+            </div>
+        </div>
+        <!--ad ends-->
+        <!--lines start-->
+        <div class="airline col-12">
+            <div class="line_box">
+                <h3>Popular AirLines</h3>
+                <p class="p_line">Book cheap flights on your favourite airlines</p>
+            </div>
+            <div class="comp_box">
+                @foreach (var item in Model.Companies)
+                {
+                    <img src="~/images/@item.ImgUrl" class="img_comp" />
+                }
+            </div>
+        </div>
+        <!--lines end-->
+        <!--trip ideas starts-->
+        <div class="trip_content col-12">
+            @await Html.PartialAsync("_CategCitPartial", Model)
+        </div>
+        <!--trip ideas ends-->
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/categ.js"></script>
+    <script>
+        // swiper starts
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 30,
+            effect: "fade",
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+        // swiper ends
+        const in_from = document.querySelector('.in_from');
+        const in_to = document.querySelector('.in_to');
+        const i_form = document.querySelector('.i_form');
+        i_form.onclick = function () {
+            const from = in_from.value;
+            const to = in_to.value;
+            if (i_form.style.transform == 'rotate(180deg)') {
+                i_form.style.transform = 'rotate(0deg)'
+            } else {
+                i_form.style.transform = 'rotate(180deg)';
+            };
+            in_from.value = to;
+            in_to.value = from;
+        };
+    </script>
+}

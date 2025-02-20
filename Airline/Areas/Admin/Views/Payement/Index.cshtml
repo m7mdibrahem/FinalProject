@@ -1,0 +1,94 @@
+﻿@model PayVM
+<link rel="stylesheet" href="~/css/pay.css" />
+
+<div class="main_page col-12">
+    <div class="main_content col-10">
+        <div class="upper_content col-12">
+            <h3 class="h_upper">Payments list</h3>
+            <div class="pay_status">
+                @if (Model.Stat == PayInd.All)
+                {
+                    <a class="a_stat" asp-action="Index" asp-route-stat="@PayInd.All" style="background-color: #181818f7;color: white !important;">All</a>
+                    <a class="a_stat" asp-action="Index" asp-route-stat="@PayInd.Complete">Completed</a>
+                    <a class="a_stat" asp-action="Index" asp-route-stat="@PayInd.Cancel">Cancelled</a>
+                    <a class="a_stat" id="a_last" asp-action="Index" asp-route-stat="@PayInd.Refund">Refunded</a>
+                }
+                else if (Model.Stat == PayInd.Complete)
+                {
+                    <a class="a_stat" asp-action="Index" asp-route-stat="@PayInd.All">All</a>
+                    <a class="a_stat" asp-action="Index" asp-route-stat="@PayInd.Complete" style="background-color: #181818f7;color: white !important;">Completed</a>
+                    <a class="a_stat" asp-action="Index" asp-route-stat="@PayInd.Cancel">Cancelled</a>
+                    <a class="a_stat" id="a_last" asp-action="Index" asp-route-stat="@PayInd.Refund">Refunded</a>
+                }
+                else if (Model.Stat == PayInd.Cancel)
+                {
+                    <a class="a_stat" asp-action="Index" asp-route-stat="@PayInd.All">All</a>
+                    <a class="a_stat" asp-action="Index" asp-route-stat="@PayInd.Complete">Completed</a>
+                    <a class="a_stat" asp-action="Index" asp-route-stat="@PayInd.Cancel" style="background-color: #181818f7;color: white !important;">Cancelled</a>
+                    <a class="a_stat" id="a_last" asp-action="Index" asp-route-stat="@PayInd.Refund">Refunded</a>
+                }
+                else if (Model.Stat == PayInd.Refund)
+                {
+                    <a class="a_stat" asp-action="Index" asp-route-stat="@PayInd.All">All</a>
+                    <a class="a_stat" asp-action="Index" asp-route-stat="@PayInd.Complete">Completed</a>
+                    <a class="a_stat" asp-action="Index" asp-route-stat="@PayInd.Cancel">Cancelled</a>
+                    <a class="a_stat" id="a_last" asp-action="Index" asp-route-stat="@PayInd.Refund" style="background-color: #181818f7;color: white !important;">Refunded</a>
+                }
+
+
+            </div>
+        </div>
+        <div class="lower_content col-12">
+            <table id="example" class="display" style="width:100%">
+                <thead class="t_head">
+                    <tr>
+                        <th style="text-align:left;width:16%;">ID</th>
+                        <th style="text-align:left;width:20%;">Name</th>
+                        <th style="text-align:left;width:20%;">Email</th>
+                        <th style="text-align:left;width:15%;">Status</th>
+                        <th style="text-align:left;width:19%;">$Total</th>
+                        <th class="t_act" style="width:10%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Payments)
+                    {
+                        <tr>
+                            <td style="text-align:left;">@item.Id</td>
+                            <td style="text-align:left;">@item.ApplicationUser.Name</td>
+                            <td style="text-align:left;">@item.ApplicationUser.Email</td>
+                            <td style="text-align:left;">@item.Status</td>
+                            <td style="text-align:left;">$@item.price</td>
+                            <td style="text-align:right;padding-top:0.6rem;padding-bottom:0.6rem;">
+                                <a asp-action="Summary" asp-route-id="@item.Id" class="a_edit"><i class="fa-solid fa-pen-to-square"></i> View</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--fixed page-->
+<div class="page_fix col-12">
+    <div class="del_box">
+        <div class="upper_box col-12">
+            <h4 class="h_box">Confirm Delete</h4>
+            <i class="fa-solid fa-x i_box"></i>
+        </div>
+        <div class="mid_box col-12"></div>
+        <div class="lower_box col-12">
+            <p class="p_box">Are you sure you want to delete ?</p>
+            <div class="btn_box">
+                <a href="#" class="a_box">yes</a>
+                <button class="btn_no">no</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        new DataTable('#example');
+    </script>
+}

@@ -1,0 +1,54 @@
+﻿@model List<City>
+<link href="~/css/mycity.css" rel="stylesheet" />
+
+
+<div class="back ">
+    <a asp-area="Customer" asp-controller="Home" class="btn btn-dark"><i class="fa-solid fa-arrow-left"></i>  Home</a>
+</div>
+
+<div class="container">
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-3 photo">
+                <img src="~/images/@item.ImgUrl" alt="" width="100%" height="100%">
+                <div class="layer">
+
+                    <h3>
+                        @item.Name
+                    </h3>
+
+
+                    <p>
+                        @item.Country.Name
+                    </p>
+                    <p>
+
+                        Categories:
+                        @{
+                            bool isFirst = true; // Flag to track the first category
+                            foreach (var cityCategory in item.CityCategories)
+                            {
+                                if (!isFirst)
+                                {
+                                    <span>, </span> <!-- Add a comma before each category except the first -->
+                                }
+                                isFirst = false; // Update the flag after the first category
+                                <a asp-area="Customer" asp-controller="mycategory" asp-action="CategoryContain" asp-route-id="@cityCategory.Category.Id" class="a_category">@cityCategory.Category.Name</a>
+                            }
+                        }
+                    </p>
+                </div>
+            </div>
+
+        }
+
+
+
+
+    </div>
+
+
+</div>

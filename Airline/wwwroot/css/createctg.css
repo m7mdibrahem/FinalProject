@@ -1,0 +1,45 @@
+﻿.main_page {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2rem;
+}
+
+.main_content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.span_in {
+    font-size: 0.8rem;
+    color: red;
+}
+
+.a_home {
+    color: #000000a1 !important;
+    text-decoration: none !important;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 0.9rem;
+    width: 4.5%;
+}
+
+.i_home {
+    transition: all ease 100ms;
+}
+
+.p_home {
+    margin: 0;
+}

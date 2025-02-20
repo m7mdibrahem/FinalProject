@@ -1,0 +1,72 @@
+﻿.main_page {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+
+.main_content {
+    width: 35%;
+}
+
+.upper_back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(5rem, 3rem);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
+    width: 4rem;
+    color: rgb(15, 15, 15) !important;
+    text-decoration: none !important;
+}
+
+.i_back {
+    font-size: 0.9rem;
+    padding-left: 13%;
+    transition: all 100ms ease;
+}
+
+.p_back {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.lower_content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 15rem;
+    gap: 2rem;
+}
+
+.i_error {
+    font-size: 5rem;
+    color: red;
+}
+
+.div_msg {
+}
+
+.p_fail {
+    text-align: center;
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.p_reset {
+    margin: 0;
+    text-align: center;
+    color: #000000db;
+}

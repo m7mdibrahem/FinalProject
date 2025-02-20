@@ -1,0 +1,59 @@
+﻿@model Country
+<link rel="stylesheet" href="~/css/createcountr.css" />
+<div class="main_page col-12">
+    <div class="main_content col-10">
+        <div class="upper_content col-12">
+            <a asp-action="Index" class="a_home">
+                <i class="fa-solid fa-arrow-left-long i_home"></i>
+                <p href="#" class="p_home">Back</p>
+            </a>
+            <h4 class="h_upper col-12" style="padding-top:1rem;">Edit Category</h4>
+        </div>
+        <form asp-action="Edition" class="col-8 pt-2" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
+            <div class="div_img mb-3">
+                <img class="img_logo" src="~/images/@Model.ImgUrl" />
+                <label for="in_logo" class="in_img">Choose photo</label>
+                <input id="in_logo" type="file" name="file" style="display:none;" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Name" style="margin:0;font-size:0.8rem;" class="form-label">Name</label>
+                <input type="text" class="form-control" asp-for="Name">
+                <span class="span_in" asp-validation-for="Name"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial.cshtml" />
+
+    <script>
+        const i_home = document.querySelector('.i_home');
+        const a_home = document.querySelector('.a_home');
+
+        a_home.addEventListener('mouseenter', function () {
+            i_home.style.marginRight = '8px';
+        });
+        a_home.addEventListener('mouseleave', function () {
+            i_home.style.marginRight = '0px';
+        });
+
+        const in_logo = document.querySelector("#in_logo");
+        const img_logo = document.querySelector(".img_logo");
+        const imgUrl = '@Model.ImgUrl';
+        in_logo.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    img_logo.setAttribute('src', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                img_logo.setAttribute('src', `/images/${imgUrl}`);
+            }
+        });
+
+    </script>
+}

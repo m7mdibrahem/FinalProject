@@ -1,0 +1,299 @@
+﻿.main_page {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 1rem;
+    z-index: -1;
+}
+
+.middle_content {
+    width: 50%;
+}
+
+.upper_content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main_area {
+    padding-top: 2rem;
+}
+
+.main_inform {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 1rem;
+}
+
+.inform_box {
+    background-color: white;
+    padding: 0.7rem 0.8rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3rem;
+    border-radius: 6px;
+    border: solid 1px #80808070;
+}
+
+.left_box {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.1rem;
+}
+
+.h_box {
+    margin: 0;
+}
+
+.p_box {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #00000091;
+}
+
+.i_calender {
+    color: #003e78;
+    font-size: 2.4rem;
+}
+
+.i_success {
+    color: green;
+    font-size: 2.4rem;
+}
+
+.i_cancel {
+    color: red;
+    font-size: 2.4rem;
+}
+
+.i_money {
+    color: #e28800;
+    font-size: 2.4rem;
+}
+
+.lower_content {
+    padding-top: 2rem;
+}
+
+.lower_left {
+    background-color: white;
+    width: 65%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border: solid 1px #80808070;
+}
+
+.p_lower_left {
+    font-weight: 500;
+    padding: 1rem 2rem;
+    margin: 0;
+}
+
+th {
+    padding: 1rem 2rem !important;
+    font-size: 0.9rem;
+}
+
+td {
+    padding: 1rem 2rem !important;
+    font-size: 0.9rem;
+}
+
+.i_mail {
+    background-color: #000000e8;
+    color: white;
+    padding: 0.3rem 0.4rem;
+    border-radius: 5px;
+}
+
+.div_paid {
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    background-color: #96bf96;
+    width: fit-content;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    color: green;
+}
+
+.p_status {
+    margin: 0;
+}
+
+.div_cancel {
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    background-color: #c26363;
+    width: fit-content;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    color: #aa1616;
+}
+
+.div_pend {
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    background-color: #cece5a;
+    width: fit-content;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    color: #c1600c;
+}
+
+.lower_content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.lower_right {
+    width: 35%;
+    padding: 0rem 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.lower_right_chart {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 1.5rem;
+    padding-top: 0.5rem;
+    border-radius: 9px;
+    border: solid 1px #80808070;
+}
+
+.chart {
+    background-color: none !important;
+    width: 100% !important;
+    height: 23rem !important;
+    border-radius: 8px;
+}
+
+.vip_div {
+    width: 32%;
+    border-radius: 8px;
+    background-color: white;
+    padding: 1rem;
+    border: solid 1px #80808070;
+}
+
+.person_div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 1rem;
+}
+
+.left_person {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.3rem;
+    flex-grow: 1;
+}
+
+.img_person {
+    width: 3rem;
+    height: 3rem;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.inf_pers {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.p_inf_pers {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #000000b5;
+}
+
+.p_person_des {
+    font-size: 0.9rem;
+    margin: 0;
+    text-align: center;
+}
+
+
+.line_person {
+    height: 1px;
+    background-color: black;
+    margin: 1rem 0rem;
+    border: dashed white 1px;
+}
+
+.lower_area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 2rem;
+}

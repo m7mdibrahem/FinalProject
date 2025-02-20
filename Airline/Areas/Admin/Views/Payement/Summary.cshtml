@@ -1,0 +1,80 @@
+﻿@model PaySummVM
+<link rel="stylesheet" href="~/css/summ.css" />
+<div class="main_page col-12">
+    <div class="main_content col-9">
+        <div class="upper_content col-12">
+            <h6 class="h_upper">Pay Summary</h6>
+            <a asp-action="Index" class="a_upper">Back to payments</a>
+        </div>
+        <div class="lower col-12">
+            <div class="lower_left">
+                <h6 class="col-12">Pickup Deatils:</h6>
+                <div class="lower_left_detail col-12">
+                    <p class="p_lower_left">Ticket id</p>
+                    <input value="@Model.Payment.Id" class="in_detail" type="text" disabled />
+                </div>
+                <div class="lower_left_detail col-12">
+                    <p class="p_lower_left">Name</p>
+                    <input value="@Model.Payment.ApplicationUser.Name" class="in_detail" type="text" disabled />
+                </div>
+                <div class="lower_left_detail col-12">
+                    <p class="p_lower_left">Email</p>
+                    <input value="@Model.Payment.ApplicationUser.Email" class="in_detail" type="email" disabled />
+                </div>
+                <div class="lower_left_detail col-12">
+                    <p class="p_lower_left">Username</p>
+                    <input value="@Model.Payment.ApplicationUser.UserName" class="in_detail" type="text" disabled />
+                </div>
+                 <div class="lower_left_detail col-12">
+                    <p class="p_lower_left">From</p>
+                    <input value="@Model.Payment.Trip.From" class="in_detail" type="text" disabled />
+                </div>
+                <div class="lower_left_detail col-12">
+                    <p class="p_lower_left">To</p>
+                    <input value="@Model.Payment.Trip.To" class="in_detail" type="text" disabled />
+                </div>
+                <div class="lower_left_detail col-12">
+                    <p class="p_lower_left">Payment date</p>
+                    <input value="@Model.Payment.Datetime" class="in_detail" type="datetime" disabled />
+                </div>
+                <div class="lower_left_detail col-12">
+                    <p class="p_lower_left">Payment Id</p>
+                    <input value="@Model.Payment.PayId" class="in_detail" type="text" disabled />
+                </div>
+                <div class="lower_left_detail col-12">
+                    <p class="p_lower_left">Payment Status</p>
+                    <input value="@Model.Payment.Status" class="in_detail" type="text" disabled />
+                </div>
+            </div>
+            <div class="lower_right">
+                <h6 class="col-12">Payment Summary</h6>
+                <div class="lower_right_deatil col-12">
+                    <p class="p_lower_right_deatil col-12">Payment Status - @Model.Payment.Status</p>
+                    <div class="lower_right_seat col-12">
+                        @foreach (var item in Model.Seats)
+                        {
+                            foreach (var number in Model.Numbers)
+                            {
+                                if (item.Number == number)
+                                {
+                                    <div class="seat_detail col-12">
+                                        <p class="p_seat">seat: <strong>@item.Number</strong></p>
+                                        <p class="p_price"><strong>$@item.Price</strong></p>
+                                    </div>
+                                }
+                            }
+                        }
+                        <div class="total_price col-12">
+                            <h6 class="h_total">Total:</h6>
+                            <h6 class="h_total">$@Model.Payment.price</h6>
+                        </div>
+                    </div>
+                    @if (Model.Payment.Status == PayStatus.Completed && Model.Payment.Trip.DepartDate > DateOnly.FromDateTime(DateTime.Now))
+                    {
+                        <a asp-action="Fund" asp-route-id="@Model.Payment.Id" class="a_refund col-12">Refund Ticket</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

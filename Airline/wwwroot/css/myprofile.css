@@ -1,0 +1,117 @@
+ *{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+} 
+
+.back
+{
+background:linear-gradient(rgba(0,0,0,0.3) , rgba(0,0,0,0.3)) , Url(../images/back.webp);
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+height:100vh;
+}
+.container1
+{
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+margin: auto;
+padding: 5%;
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+height: 80vh;
+align-content: center;
+}
+.container1 .cover
+{
+    background-color:rgba(255, 255, 255,0.2);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    height: 600px;
+    width: 800px;
+    border-radius: 20px 20px 20px 20px;
+     margin-top:30px;
+
+}
+.container1 .cover .profilePic
+{
+    text-align: center;
+}
+.container1 .cover  .profilePic .image
+{
+    margin-top: 30px;
+}
+.container1 .cover  .profilePic .image img{
+    border-radius: 50%;
+    width: 200px;
+    padding: 20px;
+
+}
+
+.container1 .cover .inputs
+{
+    text-align: center;
+    align-content: center;
+}
+.container1 .cover .inputs input
+{
+    align-content: center;
+    padding: 5px;
+    color: white;
+    width: 300px;
+    border-radius: 14px;
+    border: none;
+    background-color:rgba(0,0,0,0);
+    border-bottom: 2px solid rgba(255, 255, 255,1);
+    margin: 5px;
+
+}
+.container1 .cover .inputs input:focus
+{
+    outline: none;
+}
+.container1 .cover .inputs .U-input
+{
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+}
+.container1 .cover .inputs .btns
+{
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+
+}
+
+.container1 .cover .inputs .btns .edit
+{
+    width: 70px;
+    cursor: pointer;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid white;
+    color: white;
+    background-color: #1E90FF;
+    
+}
+.container1 .cover .inputs .btns .changepass
+{
+    width: 140px;
+    height: 30px;
+    text-decoration: none;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: #1E90FF;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+

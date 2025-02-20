@@ -1,0 +1,137 @@
+﻿@model TripVM
+<link rel="stylesheet" href="~/css/createtrp.css" />
+<div class="main_page col-12">
+    <div class="main_content col-10">
+        <div class="upper_content col-12">
+            <a asp-action="Index" class="a_home">
+                <i class="fa-solid fa-arrow-left-long i_home"></i>
+                <p href="#" class="p_home">Back</p>
+            </a>
+            <h4 class="h_upper col-12" style="padding-top:1rem;">Edit Trip</h4>
+        </div>
+        <form asp-action="Edition" class="col-8 pt-2">
+            <input type="hidden" asp-for="Trip.Id" value="@Model.Trip.Id" />
+            <div asp-validation-summary="ModelOnly" class="span_in"></div>
+            <div class="mb-3">
+                <label asp-for="Trip.CompanyId" class="label_in form-label" style="margin:0">Company</label>
+                <select class="form-select" id="categId" asp-for="Trip.CompanyId">
+                    @foreach (var item in Model.Companies)
+                    {
+                        if (item.Id == Model.Trip.CompanyId)
+                        {
+                            <option value="@item.Id" selected>@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Trip.From" class="label_in form-label" style="margin:0">From</label>
+                <select class="form-select" asp-for="Trip.From">
+                    @foreach (var item in Model.Cities)
+                    {
+                        if (item.Name == Model.Trip.From)
+                        {
+                            <option value="@item.Name" selected>@item.Country.Name, @item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Name">@item.Country.Name, @item.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Trip.To" class="label_in form-label" style="margin:0">To</label>
+                <select class="form-select" asp-for="Trip.To">
+                    @foreach (var item in Model.Cities)
+                    {
+                        if (item.Name == Model.Trip.To)
+                        {
+                            <option value="@item.Name" selected>@item.Country.Name, @item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Name">@item.Country.Name, @item.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Trip.Price" style="margin:0;" class="label_in form-label">Price in dollar</label>
+                <input type="number" class="form-control" asp-for="Trip.Price" min="0" />
+                <span class="span_in" asp-validation-for="Trip.Price"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Trip.Miles" style="margin:0;" class="label_in form-label">Miles</label>
+                <input type="number" class="form-control" asp-for="Trip.Miles" min="0" />
+                <span class="span_in" asp-validation-for="Trip.Miles"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Trip.DepartDate" style="margin:0;" class="label_in form-label">Return date</label>
+                <input type="date" class="form-control" asp-for="Trip.DepartDate" />
+                <span class="span_in" asp-validation-for="Trip.DepartDate"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Trip.ReturnDate" style="margin:0;" class="label_in form-label">Return date</label>
+                <input type="date" class="form-control" asp-for="Trip.ReturnDate" />
+                <span class="span_in" asp-validation-for="Trip.ReturnDate"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Trip.First" style="margin:0;" class="label_in form-label">First class seats</label>
+                <input type="number" class="form-control" asp-for="Trip.First" min="0" />
+                <span class="span_in" asp-validation-for="Trip.First"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Trip.Business" style="margin:0;" class="label_in form-label">Business class seats</label>
+                <input type="number" class="form-control" asp-for="Trip.Business" min="0" />
+                <span class="span_in" asp-validation-for="Trip.Business"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Trip.Premium" style="margin:0;" class="label_in form-label">Premium Economy seats</label>
+                <input type="number" class="form-control" asp-for="Trip.Premium" min="0" />
+                <span class="span_in" asp-validation-for="Trip.Premium"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Trip.Economy" style="margin:0;" class="label_in form-label">Economy seats</label>
+                <input type="number" class="form-control" asp-for="Trip.Economy" min="1" />
+                <span class="span_in" asp-validation-for="Trip.Economy"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial.cshtml" />
+
+    <script>
+        const i_home = document.querySelector('.i_home');
+        const a_home = document.querySelector('.a_home');
+
+        a_home.addEventListener('mouseenter', function () {
+            i_home.style.marginRight = '8px';
+        });
+        a_home.addEventListener('mouseleave', function () {
+            i_home.style.marginRight = '0px';
+        });
+
+        const in_logo = document.querySelector("#in_logo");
+        const img_logo = document.querySelector(".img_logo");
+        in_logo.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    img_logo.setAttribute('src', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                img_logo.setAttribute('src', '/images/flag.png');
+            }
+        });
+
+    </script>
+}

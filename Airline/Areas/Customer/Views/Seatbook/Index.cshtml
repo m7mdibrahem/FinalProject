@@ -1,0 +1,125 @@
+﻿@model Trip
+<link rel="stylesheet" href="~/css/set.css" />
+<div class="main_page col12">
+    <div class="main_content col-9">
+        <h4 style="text-align:center;" class="col-12">Booking Seats</h4>
+        <form asp-action="Book" class="div_plane col-12">
+            <input type="hidden" name="tripId" value="@Model.Id" />
+            <!--first class begin-->
+            <div class="first_all col-12">
+                <p class="p_left">First Class</p>
+                <div class="right_form">
+                    @foreach (var group in Model.Seats.Where(e => e.Degree == TripType.FirstClass).Chunk(2))
+                    {
+                        <div class="div_seats">
+                            @foreach (var item in group)
+                            {
+                                if (item.availability == Availability.Busy)
+                                {
+                                    <label class="lab_Bus">@item.Number</label>
+                                }
+                                else
+                                {
+                                    <label for="@item.Id" class="lab_right">@item.Number</label>
+                                    <input type="checkbox" id="@item.Id" name="Fseat" value="@item.Id" style="display:none;" />
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            <!--first class ends-->
+            <!--Business class begin-->
+            <div class="first_all col-12">
+                <p class="p_left">Business Class</p>
+                <div class="right_form">
+                    @foreach (var group in Model.Seats.Where(e => e.Degree == TripType.BusinessClass).Chunk(4))
+                    {
+                        <div class="div_seats">
+                            @foreach (var item in group)
+                            {
+                                if (item.availability == Availability.Busy)
+                                {
+                                    <label class="lab_Bus" style="width:23%;">@item.Number</label>
+                                }
+                                else
+                                {
+                                    <label for="@item.Id" class="lab_right" style="width:23%;">@item.Number</label>
+                                    <input type="checkbox" id="@item.Id" name="Bseat" value="@item.Id" style="display:none;" />
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            <!--Business class ends-->
+            <!--Premium class begin-->
+            <div class="first_all col-12">
+                <p class="p_left">Premium Economy Class</p>
+                <div class="right_form">
+                    @foreach (var group in Model.Seats.Where(e => e.Degree == TripType.PremiumEconomy).Chunk(4))
+                    {
+                        <div class="div_seats">
+                            @foreach (var item in group)
+                            {
+                                if (item.availability == Availability.Busy)
+                                {
+                                    <label class="lab_Bus" style="width:23%;">@item.Number</label>
+                                }
+                                else
+                                {
+                                    <label for="@item.Id" class="lab_right" style="width:23%;">@item.Number</label>
+                                    <input type="checkbox" id="@item.Id" name="Pseat" value="@item.Id" style="display:none;" />
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            <!--Premium class ends-->
+            <!--Economy class begin-->
+            <div class="first_all col-12">
+                <p class="p_left">Economy Class</p>
+                <div class="right_form">
+                    @foreach (var group in Model.Seats.Where(e => e.Degree == TripType.Economy).Chunk(4))
+                    {
+                        <div class="div_seats">
+                            @foreach (var item in group)
+                            {
+                                if (item.availability == Availability.Busy)
+                                {
+                                    <label class="lab_Bus" style="width:23%;">@item.Number</label>
+                                }
+                                else
+                                {
+                                    <label for="@item.Id" class="lab_right" style="width:23%;">@item.Number</label>
+                                    <input type="checkbox" id="@item.Id" name="Eseat" value="@item.Id" style="display:none;" />
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            <!--Economy class ends-->
+            <button type="submit" class="btn_sub">Book</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const lab_right = document.querySelectorAll('.lab_right');
+        lab_right.forEach(btn => {
+            btn.onclick = function (e) {
+                const currentColor = window.getComputedStyle(btn).backgroundColor;
+                if (currentColor == "rgb(0, 128, 0)") {
+                    btn.style.backgroundColor = "#f4f4f4";
+                    btn.style.color = "black";
+                } else {
+                    btn.style.backgroundColor = "green";
+                    btn.style.color = "#f4f4f4";
+                }
+            };
+        });
+    </script>
+}

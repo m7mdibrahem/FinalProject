@@ -1,0 +1,52 @@
+﻿@model List<Trip>
+
+<link rel="stylesheet" href="~/css/strip.css" />
+<div class="main_page col-12">
+    <div class="main_content col-8">
+        <h4 class="col-12">Searching Flights:</h4>
+        <div class="all_trips">
+            @foreach (var item in Model)
+            {
+                <a asp-area="Customer" asp-controller="Seatbook" asp-action="Index" asp-route-id="@item.Id" class="main_box">
+                    <div class="all_trip_box">
+                        <div class="trip_box">
+                            <div class="left_comp">
+                                <img src="~/images/@item.Company.ImgUrl" class="img_comp" />
+                                <p class="p_left">@item.Company.Name</p>
+                            </div>
+                            <div class="mid_comp">
+                                <p class="p_mid">@item.From</p>
+                                <div class="line_mid">
+                                    <p class="p_line_mid">@item.DepartDate</p>
+                                    <div class="line col-12"></div>
+                                    <p class="p_line_mid">@item.Miles miles</p>
+                                </div>
+                                <p class="p_mid">@item.To</p>
+                            </div>
+                        </div>
+                        <div class="trip_box">
+                            <div class="left_comp">
+                                <img src="~/images/@item.Company.ImgUrl" class="img_comp" />
+                                <p class="p_left">@item.Company.Name</p>
+                            </div>
+                            <div class="mid_comp">
+                                <p class="p_mid">@item.To</p>
+                                <div class="line_mid">
+                                    <p class="p_line_mid">@item.ReturnDate</p>
+                                    <div class="line col-12"></div>
+                                    <p class="p_line_mid">@item.Miles miles</p>
+                                </div>
+                                <p class="p_mid">@item.From</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line_right"></div>
+                    <div class="right_box">
+                        <h3 class="h_right">Price</h3>
+                        <h5 class="h_right">USD @item.Price</h5>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</div>
